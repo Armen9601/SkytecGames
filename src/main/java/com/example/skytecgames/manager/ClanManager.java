@@ -23,14 +23,12 @@ public class ClanManager {
     public static boolean saveClan(long clanId) {
         return false;
     }
+
     @Transactional(isolation = Isolation.SERIALIZABLE)
-    public int addGoldInClan(long clanId, int gold) {
+    public void addGoldInClan(long clanId, int gold) {
         Clan clan = clanRepository.findById(clanId).orElseThrow(EntityNotFoundException::new);
         int total = clan.getGold() + gold;
         clan.setGold(total);
         clanRepository.save(clan);
-        return total;
     }
-
-
 }
